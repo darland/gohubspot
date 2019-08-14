@@ -27,6 +27,7 @@ type HubspotClient struct {
 	ContactProperties *ContactPropertiesService
 	CompanyProperties *CompanyPropertiesService
 	Companies         *CompaniesService
+	EmailSubscription *EmailSubscriptionService
 	Forms             *FormService
 }
 
