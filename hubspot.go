@@ -58,6 +58,7 @@ func NewHubspotClient(auth Authenticator) *HubspotClient {
 	r.ContactProperties = (*ContactPropertiesService)(&r.common)
 	r.CompanyProperties = (*CompanyPropertiesService)(&r.common)
 	r.Companies = (*CompaniesService)(&r.common)
+	r.EmailSubscription = (*EmailSubscriptionService)(&r.common)
 	//r.Forms = (*FormService)(&r.common)
 	r.Forms = &FormService{service: r.common}
 
