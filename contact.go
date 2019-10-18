@@ -18,10 +18,42 @@ type Contact struct {
 	Properties   Properties `json:"properties"`
 }
 
+type Identity struct {
+	Type      string `json:"type"`
+	Value     string `json:"value"`
+	Timestamp int64  `json:"timestamp"`
+}
+
+type IdentityProfiles []struct {
+	Vid                     int        `json:"vid"`
+	SavedAtTimestamp        int64      `json:"saved-at-timestamp"`
+	DeletedChangedTimestamp int        `json:"deleted-changed-timestamp"`
+	Identities              []Identity `json:"identities"`
+}
+
+type ContactProperty struct {
+	Value string `json:"value"`
+}
+
+type ContactV2 struct {
+	AddedAt          int64                      `json:"addedAt"`
+	Vid              int                        `json:"vid"`
+	CanonicalVid     int                        `json:"canonical-vid"`
+	MergedVids       []interface{}              `json:"merged-vids"`
+	PortalID         int                        `json:"portal-id"`
+	IsContact        bool                       `json:"is-contact"`
+	ProfileToken     string                     `json:"profile-token"`
+	ProfileURL       string                     `json:"profile-url"`
+	FormSubmissions  []interface{}              `json:"form-submissions"`
+	IdentityProfiles IdentityProfiles           `json:"identity-profiles"`
+	MergeAudits      []interface{}              `json:"merge-audits"`
+	Properties       map[string]ContactProperty `json:"properties,omitempty"`
+}
+
 type Contacts struct {
-	Contacts  []Contact `json:"contacts"`
-	HasMore   bool      `json:"has-more"`
-	VidOffset int       `json:"vid-offset"`
+	Contacts  []ContactV2 `json:"contacts"`
+	HasMore   bool        `json:"has-more"`
+	VidOffset int         `json:"vid-offset"`
 }
 
 func (s *ContactsService) Create(properties Properties) (*IdentityProfile, error) {
