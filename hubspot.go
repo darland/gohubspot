@@ -45,12 +45,12 @@ func NewHubspotApiClient(apikey string) *HubspotClient {
 
 func NewHubspotClient(auth Authenticator) *HubspotClient {
 	r := &HubspotClient{authenticator: auth}
-	url, e := url.Parse(defaultBaseURL)
+	u, e := url.Parse(defaultBaseURL)
 	if e != nil {
 		panic(e)
 	}
 
-	r.BaseURL = url
+	r.BaseURL = u
 	r.client = http.DefaultClient
 	r.common.client = r
 	r.ContactLists = (*ContactListsService)(&r.common)
